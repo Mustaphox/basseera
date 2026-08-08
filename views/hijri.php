@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
         
-        fetch(`https://api.aladhan.com/v1/gToHCalendar/\${month}/\${year}`)
+        fetch(`https://api.aladhan.com/v1/gToHCalendar/${month}/${year}`)
             .then(r => r.json())
             .then(data => {
                 renderCalendar(data.data, date);
@@ -127,13 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const todayData = daysData.find(d => parseInt(d.gregorian.day) === today.getDate() && parseInt(d.gregorian.month.number) === (today.getMonth() + 1));
         
         if (todayData && today.getFullYear() === currentReqDate.getFullYear() && today.getMonth() === currentReqDate.getMonth()) {
-            document.getElementById('todayHijriDate').textContent = `\${todayData.hijri.day} \${todayData.hijri.month.ar} \${todayData.hijri.year}`;
-            document.getElementById('todayGregorianDate').textContent = `\${todayData.gregorian.day} \${todayData.gregorian.month.en} \${todayData.gregorian.year}`;
+            document.getElementById('todayHijriDate').textContent = `${todayData.hijri.day} ${todayData.hijri.month.ar} ${todayData.hijri.year}`;
+            document.getElementById('todayGregorianDate').textContent = `${todayData.gregorian.day} ${todayData.gregorian.month.en} ${todayData.gregorian.year}`;
         }
 
         // Title
         const firstDayHijri = daysData[0].hijri;
-        document.getElementById('currentMonthYear').textContent = `\${firstDayHijri.month.ar} \${firstDayHijri.year} / \${daysData[0].gregorian.month.en} \${daysData[0].gregorian.year}`;
+        document.getElementById('currentMonthYear').textContent = `${firstDayHijri.month.ar} ${firstDayHijri.year} / ${daysData[0].gregorian.month.en} ${daysData[0].gregorian.year}`;
 
         const tbody = document.getElementById('calendarBody');
         tbody.innerHTML = '';
@@ -165,10 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             html += `
-                <td class="cal-day \${isToday ? 'today' : ''}">
-                    <div class="hijri-num">\${day.hijri.day}</div>
-                    <div class="greg-num">\${day.gregorian.day}</div>
-                    \${holidays.length > 0 ? '<div class="event-dot"></div>' : ''}
+                <td class="cal-day ${isToday ? 'today' : ''}">
+                    <div class="hijri-num">${day.hijri.day}</div>
+                    <div class="greg-num">${day.gregorian.day}</div>
+                    ${holidays.length > 0 ? '<div class="event-dot"></div>' : ''}
                 </td>
             `;
             
@@ -191,8 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (events.length > 0) {
             eventsContainer.innerHTML = events.map(e => `
                 <div class="p-3 bg-light-primary rounded-3 border-start border-4 border-primary">
-                    <h5 class="fw-bold mb-1">\${e.title}</h5>
-                    <small class="text-muted">\${e.day} \${e.month}</small>
+                    <h5 class="fw-bold mb-1">${e.title}</h5>
+                    <small class="text-muted">${e.day} ${e.month}</small>
                 </div>
             `).join('');
         } else {

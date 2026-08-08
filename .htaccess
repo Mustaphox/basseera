@@ -1,3 +1,13 @@
+Options -Indexes
+
+<FilesMatch "\.(?:sql|md|log|ini|env)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^(?:database|database\.local|setup_db)\.php$">
+    Require all denied
+</FilesMatch>
+
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-d

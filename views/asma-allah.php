@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 col.setAttribute('data-aos-delay', delay);
                 
                 col.innerHTML = `
-                    <div class="card h-100 rounded-4 text-center p-4 asma-card position-relative" onclick="showAsmaModal('\${item.name}', '\${item.transliteration}', '\${item.en.meaning}')">
-                        <span class="asma-number">\${item.number}</span>
-                        <h3 class="fw-bold mb-0 text-primary mt-3" style="font-family: 'Amiri', 'Cairo', serif;">\${item.name}</h3>
+                    <div class="card h-100 rounded-4 text-center p-4 asma-card position-relative" onclick="showAsmaModal('${item.name}', '${item.transliteration}', '${item.en.meaning}')">
+                        <span class="asma-number">${item.number}</span>
+                        <h3 class="fw-bold mb-0 text-primary mt-3" style="font-family: 'Amiri', 'Cairo', serif;">${item.name}</h3>
                     </div>
                 `;
                 

@@ -14,7 +14,7 @@
 
 > منصة ويب إسلامية متكاملة تجمع القرآن الكريم، السيرة النبوية، الأحاديث، الأذكار، الأدعية، مواقيت الصلاة وأكثر — مبنية بـ PHP خالص دون أطر عمل ثقيلة.
 
-[🌐 Demo](http://localhost/basseera) · [🐛 Report Bug](https://github.com/Mustaphox/basseera/issues) · [💡 Request Feature](https://github.com/Mustaphox/basseera/issues)
+[🌐 Demo](https://basira.is-best.net/) · [🐛 Report Bug](https://github.com/Mustaphox/basseera/issues) · [💡 Request Feature](https://github.com/Mustaphox/basseera/issues)
 
 </div>
 

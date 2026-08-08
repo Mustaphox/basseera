@@ -13,7 +13,7 @@
                 <p class="hero-subtitle mx-auto" style="max-width: 600px;">
                     منصة إسلامية متكاملة تضم القرآن الكريم، الأحاديث، السيرة النبوية، الأذكار، الأدعية، ومحتوى إسلاميًا موثوقًا.
                 </p>
-                <div class="d-flex justify-content-center gap-3 mt-4">
+                <div class="hero-actions">
                     <a href="<?= BASE_URL ?>quran" class="btn btn-primary btn-lg rounded-pill px-5">ابدأ الآن</a>
                     <a href="<?= BASE_URL ?>quran?listen=true" class="btn btn-outline-primary btn-lg rounded-pill px-5">
                         <i data-lucide="headphones" class="me-2"></i> استمع للقرآن
@@ -104,8 +104,8 @@ $randomAyah = $randomAyahResp['success'] ? $randomAyahResp['data'] : ['text' => 
                 const bookmarks = JSON.parse(localStorage.getItem('quran_bookmarks'));
                 if (bookmarks && bookmarks.lastRead) {
                     const lr = bookmarks.lastRead;
-                    document.getElementById('continueReadingDetails').textContent = `سورة رقم \${lr.surah} - الآية \${lr.ayah}`;
-                    document.getElementById('continueReadingBtn').href = `<?= BASE_URL ?>quran/surah?id=\${lr.surah}#ayah-\${lr.ayah - 1}`;
+                    document.getElementById('continueReadingDetails').textContent = `سورة رقم ${lr.surah} - الآية ${lr.ayah}`;
+                    document.getElementById('continueReadingBtn').href = `<?= BASE_URL ?>quran/surah?id=${lr.surah}#ayah-${lr.ayah - 1}`;
                     document.getElementById('continueReadingSection').classList.remove('d-none');
                 }
             });
@@ -146,22 +146,55 @@ $randomAyah = $randomAyahResp['success'] ? $randomAyahResp['data'] : ['text' => 
                             <i data-lucide="clock" class="text-primary me-3"></i>
                             <h3 class="h4 mb-0 text-white">مواقيت الصلاة</h3>
                         </div>
-                        <span class="badge bg-primary rounded-pill px-3">الرياض</span>
+                        <span class="badge bg-primary rounded-pill px-3" id="homeCityName">جاري التحديد...</span>
                     </div>
-                    <div class="row text-center g-2 mt-2">
+                    <div class="row text-center g-2 mt-2" id="homePrayerTimes">
                         <?php 
-                        $prayers = ['الفجر' => '04:30', 'الظهر' => '12:00', 'العصر' => '15:30', 'المغرب' => '18:15', 'العشاء' => '19:45'];
-                        foreach($prayers as $name => $time):
+                        $prayers = ['الفجر' => 'Fajr', 'الشروق' => 'Sunrise', 'الظهر' => 'Dhuhr', 'العصر' => 'Asr', 'المغرب' => 'Maghrib', 'العشاء' => 'Isha'];
+                        foreach($prayers as $name => $key):
                         ?>
                         <div class="col">
                             <div class="p-2 border border-secondary rounded-3">
                                 <small class="d-block text-white-50 mb-1"><?= $name ?></small>
-                                <strong class="fs-5"><?= $time ?></strong>
+                                <strong class="fs-5 prayer-time-value" id="pt-<?= $key ?>">--:--</strong>
                             </div>
                         </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
+                <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(pos => {
+                            const lat = pos.coords.latitude;
+                            const lng = pos.coords.longitude;
+                            
+                            fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=ar`)
+                                .then(r => r.json())
+                                .then(d => {
+                                    document.getElementById('homeCityName').textContent = d.city || d.locality || 'موقعك الحالي';
+                                }).catch(() => document.getElementById('homeCityName').textContent = 'موقعك الحالي');
+                            
+                            const now = new Date();
+                            fetch(`https://api.aladhan.com/v1/timings/${Math.floor(now.getTime()/1000)}?latitude=${lat}&longitude=${lng}&method=4`)
+                                .then(r => r.json())
+                                .then(data => {
+                                    if(data.code === 200) {
+                                        const timings = data.data.timings;
+                                        ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].forEach(key => {
+                                            const el = document.getElementById(`pt-${key}`);
+                                            if(el) el.textContent = timings[key].split(' ')[0];
+                                        });
+                                    }
+                                });
+                        }, () => {
+                            document.getElementById('homeCityName').textContent = 'تعذر تحديد الموقع';
+                        });
+                    } else {
+                        document.getElementById('homeCityName').textContent = 'الموقع غير مدعوم';
+                    }
+                });
+                </script>
             </div>
             
         </div>

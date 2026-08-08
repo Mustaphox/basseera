@@ -3,9 +3,14 @@ session_start();
 require_once 'config/database.php';
 require_once 'includes/functions.php';
 
-// Define base URL for assets
-$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-$base_url = $protocol . "://" . $_SERVER['HTTP_HOST'] . "/basseera/";
+// Define a base URL that works both in a subdirectory locally and in htdocs.
+$is_https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
+$protocol = $is_https ? 'https' : 'http';
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$script_directory = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+$base_path = rtrim($script_directory, '/');
+$base_url = $protocol . '://' . $host . ($base_path === '' ? '/' : $base_path . '/');
 define('BASE_URL', $base_url);
 
 // Get URL
