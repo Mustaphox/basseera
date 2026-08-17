@@ -6,14 +6,15 @@
   **بوابة إسلامية متكاملة، عصرية، ومفتوحة المصدر للقرآن الكريم، الأحاديث، الأذكار، والمحتوى الإسلامي الموثوق**
 
   <p align="center">
+    <a href="https://basira.is-best.net/"><img src="https://img.shields.io/badge/Live%20Demo-basira.is--best.net-FF8A00?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Live Demo"></a>
     <a href="https://github.com/Mustaphox/basseera/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-amber.svg?style=for-the-badge" alt="License: MIT"></a>
     <img src="https://img.shields.io/badge/PHP-7.4%20|%208.x-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP Version">
     <img src="https://img.shields.io/badge/MySQL-5.7+-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
     <img src="https://img.shields.io/badge/Status-Active%20&%20Maintained-22C55E?style=for-the-badge" alt="Status">
-    <img src="https://img.shields.io/badge/PRs-Welcome-FF8A00?style=for-the-badge" alt="PRs Welcome">
   </p>
 
   <p align="center">
+    <a href="https://basira.is-best.net/">🌐 <b>المعاينة الحية (Live Demo)</b></a> •
     <a href="#-معاينة-واجهات-المنصة-screenshots">معاينة الواجهات</a> •
     <a href="#-مميزات-المنصة">المميزات</a> •
     <a href="#-التقنيات-المستخدمة">التقنيات</a> •
