@@ -2,44 +2,53 @@
 /**
  * Database connection settings.
  *
- * Production credentials belong in database.local.php, which is intentionally
- * ignored by Git. Environment variables take precedence when available.
+ * Configured for production hosting (InfinityFree).
+ * Environment variables or database.local.php can override if needed.
  */
 $local_config = __DIR__ . '/database.local.php';
 if (is_file($local_config)) {
     require $local_config;
 }
 
-$db_host = getenv('DB_HOST') ?: ($db_host ?? 'localhost');
-$db_user = getenv('DB_USER') ?: ($db_user ?? 'root');
-$db_pass = getenv('DB_PASS') ?: ($db_pass ?? '');
-$db_name = getenv('DB_NAME') ?: ($db_name ?? 'basseera');
+$db_host = getenv('DB_HOST') ?: ($db_host ?? 'sql104.infinityfree.com');
+$db_user = getenv('DB_USER') ?: ($db_user ?? 'if0_42341492');
+$db_pass = getenv('DB_PASS') ?: ($db_pass ?? 'HRnkoA62e1');
+$db_name = getenv('DB_NAME') ?: ($db_name ?? 'if0_42341492_bassira');
 
 try {
-    $pdo = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8mb4", $db_user, $db_pass);
-    // Set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Set default fetch mode to object
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $pdo = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8mb4", $db_user, $db_pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ]);
 } catch(PDOException $e) {
     error_log('Database connection failed: ' . $e->getMessage());
     http_response_code(500);
-    exit('تعذر الاتصال بقاعدة البيانات. يرجى المحاولة لاحقاً.');
+    exit('تعذر الاتصال بقاعدة البيانات. يرجى التأكد من استيراد الجداول وإعدادات الاتصال.');
 }
 
-// Helper function to get settings
+// Optimized helper function with static query caching
 function get_setting($pdo, $key, $default = '') {
-    $stmt = $pdo->prepare("SELECT setting_value FROM settings WHERE setting_key = ?");
-    $stmt->execute([$key]);
-    $result = $stmt->fetch();
-    if (!$result || $result->setting_value === null) {
+    static $settings_cache = null;
+
+    if ($settings_cache === null) {
+        $settings_cache = [];
+        try {
+            $stmt = $pdo->query("SELECT setting_key, setting_value FROM settings");
+            while ($row = $stmt->fetch()) {
+                $settings_cache[$row->setting_key] = $row->setting_value;
+            }
+        } catch(Exception $e) {
+            // fallback to empty cache if table fails
+        }
+    }
+
+    if (!array_key_exists($key, $settings_cache) || $settings_cache[$key] === null) {
         return $default;
     }
 
-    $value = trim($result->setting_value);
+    $value = trim($settings_cache[$key]);
 
-    // Some previous imports stored Arabic text as question marks. Do not let
-    // those corrupted values override the valid Arabic fallback in the UI.
     if (in_array($key, ['site_name', 'site_description'], true)) {
         $content = preg_replace('/[?\s\p{P}]+/u', '', $value);
         if ($content === '') {

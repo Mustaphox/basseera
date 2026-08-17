@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" href="<?= BASE_URL ?>logo.png">
     <link rel="apple-touch-icon" href="<?= BASE_URL ?>logo.png">
 
-    <!-- Google Fonts: Cairo -->
+    <!-- Google Fonts DNS preconnect & fast display=swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -36,18 +36,33 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css?v=2.0">
+
+    <!-- Anti-flash: instant theme application before paint -->
+    <script>
+        (function() {
+            var t = localStorage.getItem('theme');
+            if (!t) {
+                t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
 
+<!-- Ambient background orbs -->
+<div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+<div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+
 <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="<?= BASE_URL ?>">
-            <img src="<?= BASE_URL ?>logo.png" alt="بصيرة" style="height: 40px; width: auto;">
+        <a class="navbar-brand fw-bold" href="<?= BASE_URL ?>">
+            <img src="<?= BASE_URL ?>logo.png" alt="بصيرة" style="height: 38px; width: auto;" class="me-1">
             بصيرة
         </a>
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="تبديل القائمة">
             <span class="navbar-toggler-icon"></span>
         </button>
         
@@ -75,7 +90,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                         المزيد
                     </a>
-                    <ul class="dropdown-menu border-0 shadow-sm">
+                    <ul class="dropdown-menu border-0 shadow-lg">
                         <li><a class="dropdown-item" href="<?= BASE_URL ?>prophets">قصص الأنبياء</a></li>
                         <li><a class="dropdown-item" href="<?= BASE_URL ?>sahaba">الصحابة</a></li>
                         <li><a class="dropdown-item" href="<?= BASE_URL ?>asma-allah">أسماء الله الحسنى</a></li>
@@ -90,10 +105,10 @@
             </ul>
             
             <div class="d-flex align-items-center gap-2">
-                <button class="icon-btn" aria-label="Search" onclick="window.location.href='<?= BASE_URL ?>search'">
+                <button class="icon-btn" aria-label="البحث" onclick="window.location.href='<?= BASE_URL ?>search'" title="البحث في بصيرة">
                     <i data-lucide="search"></i>
                 </button>
-                <button class="icon-btn" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <button class="icon-btn" id="theme-toggle" aria-label="تبديل الوضع الليلي / النهاري" title="تبديل الوضع">
                     <i data-lucide="moon"></i>
                 </button>
             </div>

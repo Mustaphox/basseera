@@ -60,24 +60,24 @@
                 <div class="accordion" id="faqAccordion">
                     <div class="accordion-item border-0 shadow-sm rounded-4 mb-3 overflow-hidden">
                         <h2 class="accordion-header">
-                            <button class="accordion-button fw-bold bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
                                 هل المحتوى في المنصة موثوق؟
                             </button>
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-secondary bg-white">
+                            <div class="accordion-body" id="faqBody1">
                                 نعم، نحن نحرص على جلب المحتوى من مصادر موثوقة ككتب الصحاح، وتفاسير القرآن المعتمدة، وواجهات برمجية إسلامية مدققة.
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item border-0 shadow-sm rounded-4 mb-3 overflow-hidden">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
                                 كيف أستخدم مسبحة الأذكار؟
                             </button>
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-secondary bg-white">
+                            <div class="accordion-body">
                                 يمكنك الدخول إلى صفحة "الأذكار"، واختيار القسم المناسب، ثم الضغط على زر العداد بجانب كل ذكر حتى يكتمل العدد المطلوب.
                             </div>
                         </div>

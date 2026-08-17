@@ -90,27 +90,38 @@
                 </div>
             </div>
 
-            <!-- Monthly Table -->
-            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                <div class="card-header bg-white border-bottom p-4 d-flex justify-content-between align-items-center">
-                    <h4 class="fw-bold mb-0">📅 جدول الشهر الجاري</h4>
-                    <span id="monthLabel" class="badge bg-light-primary text-primary px-3 py-2 rounded-pill fw-bold fs-6"></span>
+            <!-- Monthly Table Toggle -->
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
+                <div class="card-header border-bottom p-4 d-flex justify-content-between align-items-center cursor-pointer" 
+                     data-bs-toggle="collapse" data-bs-target="#monthlyTableCollapse" style="cursor: pointer;">
+                    <div class="d-flex align-items-center gap-2">
+                        <i data-lucide="calendar" class="text-primary" style="width:20px;height:20px;"></i>
+                        <h5 class="fw-bold mb-0">📅 جدول مواقيت الشهر الجاري</h5>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span id="monthLabel" class="badge bg-light-primary text-primary px-3 py-2 rounded-pill fw-bold"></span>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                            <i data-lucide="chevron-down" style="width:16px;height:16px;"></i> عرض / إخفاء الجدول
+                        </button>
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-borderless mb-0 text-center align-middle" id="monthlyTable">
-                        <thead class="bg-light">
-                            <tr>
-                                <th class="py-3 ps-4">التاريخ</th>
-                                <th class="py-3">الفجر</th>
-                                <th class="py-3">الشروق</th>
-                                <th class="py-3">الظهر</th>
-                                <th class="py-3">العصر</th>
-                                <th class="py-3">المغرب</th>
-                                <th class="py-3 pe-4">العشاء</th>
-                            </tr>
-                        </thead>
-                        <tbody id="monthlyBody"></tbody>
-                    </table>
+                <div class="collapse" id="monthlyTableCollapse">
+                    <div class="table-responsive" style="max-height: 450px; overflow-y: auto;">
+                        <table class="table table-borderless mb-0 text-center align-middle" id="monthlyTable">
+                            <thead class="bg-light sticky-top">
+                                <tr>
+                                    <th class="py-3 ps-4">التاريخ</th>
+                                    <th class="py-3">الفجر</th>
+                                    <th class="py-3">الشروق</th>
+                                    <th class="py-3">الظهر</th>
+                                    <th class="py-3">العصر</th>
+                                    <th class="py-3">المغرب</th>
+                                    <th class="py-3 pe-4">العشاء</th>
+                                </tr>
+                            </thead>
+                            <tbody id="monthlyBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,12 +130,12 @@
 </section>
 
 <style>
-.prayer-card { transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
-.prayer-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(255,138,0,0.12) !important; }
-.prayer-card.active-prayer { background: linear-gradient(135deg, #FF8A00, #e65c00) !important; color: white !important; }
-.prayer-card.active-prayer .prayer-time { color: white !important; }
-.prayer-card.active-prayer .prayer-icon { background: rgba(255,255,255,0.2) !important; }
-.today-row { background: rgba(255,138,0,0.08); font-weight: 600; color: #FF8A00; }
+.prayer-card { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; cursor: default; }
+.prayer-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(255,138,0,0.2) !important; border-color: rgba(255,138,0,0.35) !important; }
+.prayer-card.active-prayer { background: linear-gradient(135deg, rgba(255,138,0,0.35), rgba(230,92,0,0.25)) !important; border-color: rgba(255,138,0,0.6) !important; box-shadow: 0 0 30px rgba(255,138,0,0.3) !important; }
+.prayer-card.active-prayer .prayer-time { color: #FF8A00 !important; }
+.prayer-card.active-prayer .prayer-icon { background: rgba(255,138,0,0.2) !important; }
+.today-row { background: rgba(255,138,0,0.10); font-weight: 600; color: #FF8A00; }
 </style>
 
 <script>

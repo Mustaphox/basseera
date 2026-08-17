@@ -90,74 +90,61 @@ $duas = [
     ],
     [
         'cat'  => 'جوامع',
-        'text' => 'اللَّهُمَّ رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',
-        'ref'  => 'رواه البخاري ومسلم',
-    ],
+        'text' => 'اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي',
+        'ref'  => 'رواه الترمذي — دعاء ليلة القدر',
+    ]
 ];
 ?>
 
+<!-- Header -->
 <section class="py-5 bg-light-primary border-bottom">
     <div class="container text-center">
-        <h1 class="display-5 fw-bold text-primary mb-3">الأدعية الجامعة</h1>
-        <p class="lead text-muted mx-auto" style="max-width: 620px;">
-            ﴿ وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ ﴾
+        <h1 class="display-5 fw-bold text-primary mb-3">الأدعية المأثورة والجامعة</h1>
+        <p class="lead text-muted mx-auto mb-4" style="max-width: 600px;">
+            ﴿وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ﴾
         </p>
+
+        <!-- Search input -->
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="position-relative shadow-sm rounded-pill mb-3">
+                    <i data-lucide="search" class="position-absolute top-50 translate-middle-y text-muted" style="right: 18px;"></i>
+                    <input type="text" id="duaaSearch" class="form-control form-control-lg rounded-pill border-0 pe-5 shadow-sm" placeholder="ابحث في الأدعية..." style="padding-right: 48px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-2">
+            <button class="btn btn-primary rounded-pill px-4 filter-duaa-btn active" onclick="filterDuaaCat('all', this)">الكل</button>
+            <button class="btn btn-outline-primary rounded-pill px-4 filter-duaa-btn" onclick="filterDuaaCat('قرآنية', this)">أدعية قرآنية</button>
+            <button class="btn btn-outline-primary rounded-pill px-4 filter-duaa-btn" onclick="filterDuaaCat('نبوية', this)">أدعية نبوية</button>
+            <button class="btn btn-outline-primary rounded-pill px-4 filter-duaa-btn" onclick="filterDuaaCat('أنبياء', this)">أدعية الأنبياء</button>
+            <button class="btn btn-outline-primary rounded-pill px-4 filter-duaa-btn" onclick="filterDuaaCat('جوامع', this)">جوامع الدعاء</button>
+        </div>
     </div>
 </section>
 
+<!-- Duaa Grid Section -->
 <section class="py-5">
     <div class="container">
+        
+        <div class="row g-4 justify-content-center" id="duaaGrid"></div>
 
-        <!-- Filters -->
-        <div class="d-flex flex-wrap justify-content-center gap-2 mb-5" id="filterBtns">
-            <button class="btn btn-primary rounded-pill px-4 fw-bold filter-btn active" data-cat="all">الكل</button>
-            <button class="btn btn-outline-primary rounded-pill px-4 fw-bold filter-btn" data-cat="قرآنية">أدعية قرآنية</button>
-            <button class="btn btn-outline-primary rounded-pill px-4 fw-bold filter-btn" data-cat="نبوية">أدعية نبوية</button>
-            <button class="btn btn-outline-primary rounded-pill px-4 fw-bold filter-btn" data-cat="أنبياء">أدعية الأنبياء</button>
-            <button class="btn btn-outline-primary rounded-pill px-4 fw-bold filter-btn" data-cat="جوامع">جوامع الدعاء</button>
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center align-items-center gap-3 mt-5" id="duaaPagination">
+            <button class="btn btn-outline-primary rounded-pill px-4" id="prevDuaaBtn" onclick="changeDuaaPage(-1)">
+                <i data-lucide="chevron-right" class="me-1"></i> السابق
+            </button>
+            <span class="text-muted fw-bold" id="duaaPageIndicator">صفحة 1</span>
+            <button class="btn btn-outline-primary rounded-pill px-4" id="nextDuaaBtn" onclick="changeDuaaPage(1)">
+                التالي <i data-lucide="chevron-left" class="ms-1"></i>
+            </button>
         </div>
 
-        <!-- Grid -->
-        <div class="row g-4" id="duaaGrid">
-            <?php foreach($duas as $index => $dua): ?>
-            <div class="col-lg-6 duaa-item" data-cat="<?= $dua['cat'] ?>" data-aos="fade-up" data-aos-delay="<?= ($index % 4) * 75 ?>">
-                <div class="card h-100 border-0 shadow-sm rounded-4 p-4 p-md-5 duaa-card position-relative overflow-hidden">
-                    <!-- Decorative corner -->
-                    <div class="position-absolute" style="top:-20px; left:-20px; width:80px; height:80px; background:rgba(255,138,0,0.06); border-radius:50%;"></div>
-                    
-                    <div class="d-flex justify-content-between align-items-start mb-4">
-                        <span class="badge px-3 py-2 rounded-pill fw-bold"
-                              style="background:rgba(255,138,0,0.12); color:#FF8A00;">
-                            <?= $dua['cat'] ?>
-                        </span>
-                        <button class="btn btn-light btn-sm rounded-circle p-2 bookmark-btn" onclick="toggleBookmark(this, '<?= $index ?>')" title="حفظ الدعاء">
-                            <i data-lucide="bookmark" style="width:16px;height:16px;"></i>
-                        </button>
-                    </div>
-
-                    <p class="fs-4 fw-bold lh-lg text-dark mb-4 text-center position-relative" style="font-family:'Amiri','Cairo',serif;">
-                        <?= $dua['text'] ?>
-                    </p>
-
-                    <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                        <small class="text-muted d-flex align-items-center gap-1">
-                            <i data-lucide="book-open" style="width:13px;height:13px;"></i>
-                            <?= $dua['ref'] ?>
-                        </small>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-light btn-sm rounded-circle p-2" title="نسخ"
-                                onclick="copyDuaa('<?= addslashes($dua['text']) ?>', this)">
-                                <i data-lucide="copy" style="width:16px;height:16px;"></i>
-                            </button>
-                            <button class="btn btn-light btn-sm rounded-circle p-2" title="مشاركة"
-                                onclick="shareDuaa('<?= addslashes($dua['text']) ?>', '<?= addslashes($dua['ref']) ?>')">
-                                <i data-lucide="share-2" style="width:16px;height:16px;"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
+        <div id="noDuaaResults" class="text-center py-5 d-none">
+            <div class="mb-3 text-muted" style="font-size: 3.5rem;">🤲</div>
+            <h4 class="text-muted fw-bold">لا توجد أدعية مطابقة للبحث</h4>
         </div>
 
     </div>
@@ -166,82 +153,125 @@ $duas = [
 <style>
 .duaa-card {
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border-right: 4px solid var(--bs-primary) !important;
 }
 .duaa-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 28px rgba(255,138,0,0.12) !important;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(255,138,0,0.18) !important;
 }
-.bookmark-btn.bookmarked { background-color: rgba(255,138,0,0.12) !important; }
-.bookmark-btn.bookmarked i { fill: #FF8A00; color: #FF8A00; }
-.filter-btn { transition: all 0.2s ease; }
+.duaa-arabic-text {
+    font-family: 'Amiri', 'Cairo', serif;
+    font-size: 1.5rem;
+    line-height: 2.3;
+    text-align: justify;
+}
 </style>
 
 <script>
-// ── Filter ────────────────────────────────────────────────────────────────────
-document.querySelectorAll('.filter-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('.filter-btn').forEach(function(b) {
-            b.classList.remove('active', 'btn-primary');
-            b.classList.add('btn-outline-primary');
-        });
-        btn.classList.add('active', 'btn-primary');
-        btn.classList.remove('btn-outline-primary');
+var allDuas = <?= json_encode($duas, JSON_UNESCAPED_UNICODE) ?>;
+var filteredDuas = allDuas;
+var currentDuaaCat = 'all';
+var duaaPage = 1;
+var duaaPageSize = 6;
 
-        var cat = btn.dataset.cat;
-        document.querySelectorAll('.duaa-item').forEach(function(item) {
-            item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
-        });
+function filterDuaaCat(cat, btn) {
+    document.querySelectorAll('.filter-duaa-btn').forEach(function(b) {
+        b.className = 'btn btn-outline-primary rounded-pill px-4 filter-duaa-btn';
     });
-});
+    btn.className = 'btn btn-primary rounded-pill px-4 filter-duaa-btn active';
+    currentDuaaCat = cat;
+    applyDuaaFilters();
+}
 
-// ── Bookmarks (localStorage) ──────────────────────────────────────────────────
-function getBookmarks() {
-    try { return JSON.parse(localStorage.getItem('duaa_bookmarks')) || []; }
-    catch(e) { return []; }
+function applyDuaaFilters() {
+    var q = document.getElementById('duaaSearch').value.trim().toLowerCase();
+    filteredDuas = allDuas.filter(function(d) {
+        var matchCat = currentDuaaCat === 'all' || d.cat === currentDuaaCat;
+        var matchQ   = d.text.includes(q) || d.ref.includes(q);
+        return matchCat && matchQ;
+    });
+
+    duaaPage = 1;
+    renderDuas();
 }
-function saveBookmarks(bk) {
-    localStorage.setItem('duaa_bookmarks', JSON.stringify(bk));
-}
-function toggleBookmark(btn, id) {
-    var bk = getBookmarks();
-    var i  = bk.indexOf(id);
-    if (i > -1) { bk.splice(i, 1); btn.classList.remove('bookmarked'); }
-    else         { bk.push(id);     btn.classList.add('bookmarked'); }
-    saveBookmarks(bk);
+
+function renderDuas() {
+    var grid = document.getElementById('duaaGrid');
+    var noRes = document.getElementById('noDuaaResults');
+    var pag = document.getElementById('duaaPagination');
+    grid.innerHTML = '';
+
+    if (filteredDuas.length === 0) {
+        noRes.classList.remove('d-none');
+        pag.style.display = 'none';
+        return;
+    }
+    noRes.classList.add('d-none');
+
+    var totalPages = Math.ceil(filteredDuas.length / duaaPageSize);
+    var start = (duaaPage - 1) * duaaPageSize;
+    var end = Math.min(start + duaaPageSize, filteredDuas.length);
+    var pageItems = filteredDuas.slice(start, end);
+
+    pageItems.forEach(function(d) {
+        var col = document.createElement('div');
+        col.className = 'col-lg-6';
+        col.innerHTML = 
+            '<div class="card h-100 border-0 shadow-sm rounded-4 p-4 p-md-5 duaa-card d-flex flex-column justify-content-between">' +
+                '<div>' +
+                    '<div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">' +
+                        '<span class="badge bg-warning bg-opacity-25 text-warning fw-bold px-3 py-2 rounded-pill">' + d.cat + '</span>' +
+                        '<button class="btn btn-sm btn-outline-primary rounded-pill px-3" onclick="copyDuaa(this, `' + escapeQuotes(d.text) + '`, `' + escapeQuotes(d.ref) + '`)">' +
+                            '<i data-lucide="copy" style="width:14px;height:14px;" class="me-1"></i> نسخ' +
+                        '</button>' +
+                    '</div>' +
+                    '<p class="duaa-arabic-text mb-4">' + d.text + '</p>' +
+                '</div>' +
+                '<div class="text-muted small pt-2 border-top">' +
+                    '<i data-lucide="bookmark" style="width:14px;height:14px;" class="me-1"></i> ' + d.ref +
+                '</div>' +
+            '</div>';
+        grid.appendChild(col);
+    });
+
+    if (totalPages > 1) {
+        pag.style.display = 'flex';
+        document.getElementById('duaaPageIndicator').textContent = 'صفحة ' + duaaPage + ' من ' + totalPages;
+        document.getElementById('prevDuaaBtn').disabled = duaaPage <= 1;
+        document.getElementById('nextDuaaBtn').disabled = duaaPage >= totalPages;
+    } else {
+        pag.style.display = 'none';
+    }
+
     if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
-// Restore bookmark states on load
-document.addEventListener('DOMContentLoaded', function() {
-    var bk = getBookmarks();
-    document.querySelectorAll('.bookmark-btn').forEach(function(btn) {
-        var id = btn.getAttribute('onclick').match(/'(\d+)'/)[1];
-        if (bk.includes(id)) btn.classList.add('bookmarked');
-    });
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-});
+function changeDuaaPage(delta) {
+    duaaPage += delta;
+    renderDuas();
+    window.scrollTo({ top: 350, behavior: 'smooth' });
+}
 
-// ── Copy ──────────────────────────────────────────────────────────────────────
-function copyDuaa(text, btn) {
-    navigator.clipboard.writeText(text).then(function() {
-        var icon = btn.querySelector('i');
-        icon.setAttribute('data-lucide', 'check');
+function copyDuaa(btn, text, ref) {
+    var full = text + '\n[' + ref + ']';
+    navigator.clipboard.writeText(full).then(function() {
+        btn.innerHTML = '<i data-lucide="check" style="width:14px;height:14px;" class="me-1"></i> تم النسخ';
         if (typeof lucide !== 'undefined') lucide.createIcons();
         setTimeout(function() {
-            icon.setAttribute('data-lucide', 'copy');
+            btn.innerHTML = '<i data-lucide="copy" style="width:14px;height:14px;" class="me-1"></i> نسخ';
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }, 2000);
     });
 }
 
-// ── Share ─────────────────────────────────────────────────────────────────────
-function shareDuaa(text, ref) {
-    var shareText = text + '\n\n📖 المصدر: ' + ref + '\n\n🌐 بصيرة - منصة إسلامية';
-    if (navigator.share) {
-        navigator.share({ title: 'دعاء من بصيرة', text: shareText });
-    } else {
-        navigator.clipboard.writeText(shareText);
-        alert('تم نسخ الدعاء للمشاركة!');
-    }
+function escapeQuotes(str) {
+    if (!str) return '';
+    return str.replace(/`/g, "'").replace(/"/g, '&quot;');
 }
+
+document.getElementById('duaaSearch').addEventListener('input', applyDuaaFilters);
+
+document.addEventListener('DOMContentLoaded', function() {
+    renderDuas();
+});
 </script>

@@ -1,61 +1,267 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+/* ============================================================
+   BASSEERA - Modern Design System & Theme Engine
+   ============================================================ */
 
-:root {
+:root, [data-theme="dark"] {
     --bs-primary: #FF8A00;
     --bs-primary-rgb: 255, 138, 0;
-    --bg-color: #FFFFFF;
-    --card-bg: #FFFFFF;
-    --border-color: #F2F2F2;
-    --text-primary: #1F1F1F;
-    --text-secondary: #666666;
+
+    /* Theme Palette - Dark Mode (Default) */
+    --bg-page: linear-gradient(135deg, #090614 0%, #120924 45%, #0b1326 100%);
+    
+    /* Typography Colors - Dark Mode */
+    --text-heading: #ffffff;
+    --text-body: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-primary: #ffffff;
+    --text-muted-glass: rgba(255, 255, 255, 0.45);
+
+    /* Glassmorphism & Surfaces */
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-bg-light: rgba(255, 255, 255, 0.10);
+    --glass-bg-strong: rgba(255, 255, 255, 0.16);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-border-hover: rgba(255, 138, 0, 0.5);
+    --glass-blur: blur(20px);
+    --glass-blur-heavy: blur(40px);
+
+    /* Cards & Components */
+    --card-bg: var(--glass-bg);
+    --card-border: var(--glass-border);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+    /* Navigation & Menus */
+    --navbar-bg: rgba(13, 8, 30, 0.88);
+    --navbar-border: rgba(255, 255, 255, 0.08);
+    --dropdown-bg: rgba(20, 10, 42, 0.95);
+    --dropdown-border: rgba(255, 255, 255, 0.14);
+    --dropdown-text: #e2e8f0;
+    --dropdown-hover-bg: rgba(255, 138, 0, 0.16);
+
+    /* Form Controls */
+    --input-bg: rgba(255, 255, 255, 0.08);
+    --input-border: rgba(255, 255, 255, 0.16);
+    --input-text: #ffffff;
+    --input-placeholder: rgba(255, 255, 255, 0.45);
+    --input-focus-bg: rgba(255, 255, 255, 0.12);
+
+    /* Modals & Overlays */
+    --modal-bg: rgba(20, 9, 44, 0.96);
+    --modal-border: rgba(255, 255, 255, 0.14);
+    --modal-backdrop: rgba(5, 2, 15, 0.75);
+
+    /* Footer & Header */
+    --footer-bg: rgba(8, 4, 18, 0.85);
+    --footer-border: rgba(255, 255, 255, 0.08);
+
+    /* Quran & Islamic Text */
+    --quran-text-color: #fffbf2;
+    --quran-text-shadow: 0 0 25px rgba(255, 138, 0, 0.18);
+
+    /* Shadows & Glow */
+    --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 30px rgba(255, 138, 0, 0.25);
+    --shadow-glow-strong: 0 0 50px rgba(255, 138, 0, 0.4);
+
+    /* Accents */
     --success: #22C55E;
     --danger: #EF4444;
-    --radius-card: 16px;
+    --radius-card: 20px;
     --radius-btn: 12px;
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-    --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
-    --transition: all 0.3s ease;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-html,
-body {
+/* ============================================================
+   Light Theme (الوضع النهاري)
+   ============================================================ */
+[data-theme="light"] {
+    /* Page Background */
+    --bg-page: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 45%, #e2e8f0 100%);
+
+    /* Typography Colors - Light Mode (High Contrast & Legibility) */
+    --text-heading: #0f172a;       /* Slate 900 */
+    --text-body: #1e293b;          /* Slate 800 */
+    --text-secondary: #334155;     /* Slate 700 */
+    --text-muted: #475569;         /* Slate 600 - High Contrast AA */
+    --text-primary: #0f172a;
+    --text-muted-glass: rgba(15, 23, 42, 0.6);
+
+    /* Surfaces & Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.92);
+    --glass-bg-light: rgba(255, 255, 255, 0.96);
+    --glass-bg-strong: #ffffff;
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --glass-border-hover: rgba(255, 138, 0, 0.45);
+    --glass-blur: blur(15px);
+    --glass-blur-heavy: blur(25px);
+
+    /* Cards & Components */
+    --card-bg: var(--glass-bg);
+    --card-border: var(--glass-border);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+
+    /* Navigation & Menus */
+    --navbar-bg: rgba(255, 255, 255, 0.90);
+    --navbar-border: rgba(0, 0, 0, 0.07);
+    --dropdown-bg: rgba(255, 255, 255, 0.98);
+    --dropdown-border: rgba(0, 0, 0, 0.10);
+    --dropdown-text: #1e293b;
+    --dropdown-hover-bg: rgba(255, 138, 0, 0.10);
+
+    /* Form Controls */
+    --input-bg: #ffffff;
+    --input-border: rgba(0, 0, 0, 0.15);
+    --input-text: #0f172a;
+    --input-placeholder: rgba(0, 0, 0, 0.45);
+    --input-focus-bg: #ffffff;
+
+    /* Modals & Overlays */
+    --modal-bg: rgba(255, 255, 255, 0.98);
+    --modal-border: rgba(0, 0, 0, 0.10);
+    --modal-backdrop: rgba(15, 23, 42, 0.45);
+
+    /* Footer & Header */
+    --footer-bg: rgba(255, 255, 255, 0.95);
+    --footer-border: rgba(0, 0, 0, 0.07);
+
+    /* Quran & Islamic Text */
+    --quran-text-color: #0f172a;
+    --quran-text-shadow: 0 0 20px rgba(255, 138, 0, 0.10);
+
+    /* Shadows */
+    --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-glow: 0 0 25px rgba(255, 138, 0, 0.18);
+    --shadow-glow-strong: 0 0 45px rgba(255, 138, 0, 0.28);
+}
+
+/* ============================================================
+   Base & Reset
+   ============================================================ */
+html, body {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
     box-sizing: border-box;
 }
 
-img,
-svg {
+img, svg {
     max-width: 100%;
 }
 
-[data-theme="dark"] {
-    --bg-color: #121212;
-    --card-bg: #1E1E1E;
-    --border-color: #2D2D2D;
-    --text-primary: #F3F4F6;
-    --text-secondary: #9CA3AF;
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
-    --shadow-md: 0 8px 24px rgba(0,0,0,0.3);
-}
-
 body {
-    font-family: 'Cairo', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-primary);
+    font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+    background: var(--bg-page);
+    background-attachment: fixed;
+    color: var(--text-body);
     transition: var(--transition);
     overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+    line-height: 1.75;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* Ambient Floating Background Orbs */
+body::before,
+body::after,
+.bg-orb {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+    animation: orbFloat 14s ease-in-out infinite alternate;
+}
+
+body::before {
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(255, 138, 0, 0.14) 0%, transparent 70%);
+    top: -150px;
+    right: -150px;
+}
+
+body::after {
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(120, 50, 200, 0.12) 0%, transparent 70%);
+    bottom: -100px;
+    left: -100px;
+    animation-delay: -6s;
+}
+
+[data-theme="light"] body::before {
+    background: radial-gradient(circle, rgba(255, 138, 0, 0.10) 0%, transparent 70%);
+}
+
+[data-theme="light"] body::after {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.07) 0%, transparent 70%);
+}
+
+.bg-orb-1 {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.10) 0%, transparent 70%);
+    top: 40%;
+    right: 20%;
+    animation-delay: -3s;
+}
+
+.bg-orb-2 {
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(50, 100, 200, 0.08) 0%, transparent 70%);
+    bottom: 30%;
+    left: 30%;
+    animation-delay: -9s;
+}
+
+@keyframes orbFloat {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(25px, -25px) scale(1.08); }
+    100% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+main, nav, footer, section, .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================
+   Typography (Headings, Paragraphs, Links)
+   ============================================================ */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--text-heading) !important;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+p, span, div, li {
+    color: var(--text-body);
+}
+
+.text-dark {
+    color: var(--text-heading) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+.text-primary {
+    color: var(--bs-primary) !important;
 }
 
 a {
@@ -65,20 +271,26 @@ a {
 }
 
 a:hover {
-    color: #e67a00;
+    color: #ffaa44;
 }
 
-/* Header */
+/* ============================================================
+   Navbar & Navigation
+   ============================================================ */
 .navbar {
-    background-color: var(--card-bg) !important;
-    border-bottom: 1px solid var(--border-color);
-    backdrop-filter: blur(10px);
-    padding: 1rem 0;
+    background: var(--navbar-bg) !important;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--navbar-border) !important;
+    padding: 0.85rem 0;
     transition: var(--transition);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .navbar-brand {
-    font-weight: 700;
+    font-weight: 800;
     font-size: 1.5rem;
     color: var(--bs-primary) !important;
     display: flex;
@@ -89,70 +301,125 @@ a:hover {
 .nav-link {
     color: var(--text-secondary) !important;
     font-weight: 600;
-    padding: 0.5rem 1rem !important;
+    padding: 0.5rem 0.9rem !important;
     border-radius: var(--radius-btn);
     transition: var(--transition);
 }
 
 .nav-link:hover, .nav-link.active {
     color: var(--bs-primary) !important;
-    background-color: rgba(255, 138, 0, 0.05);
+    background-color: rgba(255, 138, 0, 0.10);
 }
 
+.navbar-toggler {
+    border-color: var(--glass-border) !important;
+}
+
+[data-theme="dark"] .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+[data-theme="light"] .navbar-toggler-icon {
+    filter: none;
+}
+
+/* Dropdown Menu */
 .dropdown-menu {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: var(--dropdown-bg) !important;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--dropdown-border) !important;
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-md);
+    padding: 0.5rem;
 }
 
 .dropdown-item {
-    color: var(--text-secondary);
+    color: var(--dropdown-text) !important;
     transition: var(--transition);
-    border-radius: 8px;
-    margin: 4px 8px;
-    width: auto;
+    border-radius: 10px;
+    margin: 2px 0;
+    padding: 0.6rem 1rem;
+    font-weight: 600;
 }
 
-.dropdown-item:hover {
-    background-color: rgba(255, 138, 0, 0.05);
-    color: var(--bs-primary);
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: var(--dropdown-hover-bg) !important;
+    color: var(--bs-primary) !important;
 }
 
-/* Buttons */
+.dropdown-divider {
+    border-color: var(--glass-border);
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
 .btn {
     border-radius: var(--radius-btn);
-    font-weight: 600;
-    padding: 0.6rem 1.5rem;
+    font-weight: 700;
+    padding: 0.6rem 1.4rem;
     transition: var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary {
-    background-color: var(--bs-primary);
-    border-color: var(--bs-primary);
-    color: #fff;
+    background: linear-gradient(135deg, #FF8A00, #FF5F1F) !important;
+    border: none !important;
+    color: #fff !important;
+    box-shadow: 0 4px 15px rgba(255, 138, 0, 0.35);
 }
 
 .btn-primary:hover {
-    background-color: #e67a00;
-    border-color: #e67a00;
+    background: linear-gradient(135deg, #FF9E26, #FF7030) !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 138, 0, 0.2);
+    box-shadow: var(--shadow-glow);
+    color: #fff !important;
 }
 
 .btn-outline-primary {
-    color: var(--bs-primary);
-    border-color: var(--bs-primary);
+    color: var(--bs-primary) !important;
+    border: 1.5px solid rgba(255, 138, 0, 0.6) !important;
+    background: rgba(255, 138, 0, 0.06);
+    backdrop-filter: blur(10px);
 }
 
 .btn-outline-primary:hover {
-    background-color: var(--bs-primary);
-    color: #fff;
+    background: linear-gradient(135deg, #FF8A00, #FF5F1F) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-light {
+    background: var(--glass-bg-light) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border) !important;
+    color: var(--text-heading) !important;
+}
+
+.btn-light:hover {
+    background: var(--glass-bg-strong) !important;
+    color: var(--bs-primary) !important;
+}
+
+.btn-outline-secondary {
+    color: var(--text-secondary) !important;
+    border-color: var(--glass-border) !important;
+    background: var(--glass-bg);
+}
+
+.btn-outline-secondary:hover {
+    background: var(--glass-bg-strong) !important;
+    border-color: var(--glass-border-hover) !important;
+    color: var(--text-heading) !important;
 }
 
 .icon-btn {
-    background: transparent;
-    border: none;
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
     color: var(--text-secondary);
     display: inline-flex;
     align-items: center;
@@ -165,39 +432,97 @@ a:hover {
 }
 
 .icon-btn:hover {
-    background-color: rgba(255, 138, 0, 0.1);
+    background: rgba(255, 138, 0, 0.16);
+    border-color: rgba(255, 138, 0, 0.4);
     color: var(--bs-primary);
+    box-shadow: 0 0 15px rgba(255, 138, 0, 0.25);
 }
 
-/* Cards */
+/* ============================================================
+   Cards & Surfaces
+   ============================================================ */
 .card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: var(--card-bg) !important;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--card-border) !important;
     border-radius: var(--radius-card);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--card-shadow);
     transition: var(--transition);
+    color: var(--text-body);
 }
 
 .card:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-md), var(--shadow-glow);
     transform: translateY(-4px);
-    border-color: rgba(255, 138, 0, 0.3);
+    border-color: var(--glass-border-hover) !important;
 }
 
-/* Utilities */
-.text-primary {
-    color: var(--bs-primary) !important;
+.card-title {
+    color: var(--text-heading) !important;
+    font-weight: 700;
 }
 
-.text-muted {
-    color: var(--text-secondary) !important;
+.card-header {
+    background: transparent !important;
+    border-bottom: 1px solid var(--card-border) !important;
 }
 
-.bg-light-primary {
-    background-color: rgba(255, 138, 0, 0.05);
+.widget-card {
+    background: linear-gradient(135deg, rgba(255, 138, 0, 0.88) 0%, rgba(255, 80, 30, 0.78) 100%) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 138, 0, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(255, 138, 0, 0.25);
+    color: #ffffff !important;
 }
 
-/* Hero Section */
+.widget-card h1, .widget-card h2, .widget-card h3, .widget-card h4, .widget-card p, .widget-card span {
+    color: #ffffff !important;
+}
+
+/* ============================================================
+   Form Controls & Inputs
+   ============================================================ */
+.form-control, .form-select {
+    background: var(--input-bg) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--input-border) !important;
+    color: var(--input-text) !important;
+    border-radius: 12px;
+    padding: 0.65rem 1rem;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.form-control:focus, .form-select:focus {
+    background: var(--input-focus-bg) !important;
+    border-color: rgba(255, 138, 0, 0.5) !important;
+    box-shadow: 0 0 0 3px rgba(255, 138, 0, 0.15) !important;
+    color: var(--input-text) !important;
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: var(--input-placeholder) !important;
+}
+
+.form-label {
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.input-group-text {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-secondary);
+    border-radius: 12px;
+}
+
+/* ============================================================
+   Hero Section
+   ============================================================ */
 .hero-section {
     padding: 100px 0;
     position: relative;
@@ -206,27 +531,38 @@ a:hover {
 
 .hero-bg-pattern {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.05;
+    inset: 0;
     background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23FF8A00" fill-opacity="1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-    z-index: -1;
+    opacity: 0.04;
+    z-index: 0;
 }
 
 .hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
+    font-size: 3.4rem;
+    font-weight: 900;
+    margin-bottom: 1.25rem;
+    line-height: 1.25;
+}
+
+[data-theme="dark"] .hero-title {
+    background: linear-gradient(135deg, #ffffff 0%, #ffd080 50%, #FF8A00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-theme="light"] .hero-title {
+    background: linear-gradient(135deg, #0f172a 0%, #a24200 60%, #FF8A00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: var(--text-secondary);
     margin-bottom: 2rem;
-    line-height: 1.8;
+    line-height: 1.9;
 }
 
 .hero-actions {
@@ -236,7 +572,7 @@ a:hover {
     margin-top: 1.5rem;
 }
 
-/* Service Cards (Home) */
+/* Service Cards */
 .service-card {
     padding: 2rem;
     text-align: center;
@@ -246,66 +582,267 @@ a:hover {
 .service-icon {
     width: 64px;
     height: 64px;
-    background-color: rgba(255, 138, 0, 0.1);
+    background: rgba(255, 138, 0, 0.12);
     color: var(--bs-primary);
     border-radius: 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     transition: var(--transition);
+    border: 1px solid rgba(255, 138, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(255, 138, 0, 0.12);
 }
 
 .service-card:hover .service-icon {
-    background-color: var(--bs-primary);
+    background: linear-gradient(135deg, #FF8A00, #FF5F1F);
     color: #fff;
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 25px rgba(255, 138, 0, 0.35);
 }
 
-/* Widgets */
-.widget-card {
-    background: linear-gradient(135deg, var(--bs-primary) 0%, #ff6a00 100%);
-    color: white;
-    border: none;
-}
-
-.widget-card h3, .widget-card p {
-    color: white;
-}
-
-/* Quran Typography */
-.quran-text {
-    font-family: 'Amiri', 'Cairo', serif; /* Amiri is excellent for Quran */
-    font-size: 2rem;
-    line-height: 2.5;
+/* ============================================================
+   Quran & Islamic Typography
+   ============================================================ */
+.quran-text, #quranText {
+    font-family: 'Amiri', 'Cairo', serif;
+    font-size: 2.2rem;
+    line-height: 2.7;
     text-align: justify;
-    text-align-last: center;
     direction: rtl;
+    color: var(--quran-text-color) !important;
+    text-shadow: var(--quran-text-shadow);
 }
 
-/* Footer */
+.ayah-word {
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 2px 4px;
+    transition: background-color 0.2s;
+    display: inline;
+}
+
+.ayah-word:hover {
+    background: rgba(255, 138, 0, 0.12);
+}
+
+.ayah-word.playing {
+    background: rgba(255, 138, 0, 0.22) !important;
+    color: #FF8A00 !important;
+}
+
+.ayah-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+    font-family: 'Cairo', sans-serif;
+    color: #FF8A00;
+    font-weight: 700;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 2 L98 26 L98 74 L50 98 L2 74 L2 26 Z' fill='none' stroke='%23FF8A00' stroke-width='4'/%3E%3C/svg%3E") center/contain no-repeat;
+    vertical-align: middle;
+    margin: 0 8px;
+}
+
+/* ============================================================
+   Prayer Times Grid
+   ============================================================ */
+#homePrayerTimes .col > div {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border) !important;
+    border-radius: 14px;
+    transition: var(--transition);
+}
+
+#homePrayerTimes .col > div:hover {
+    background: rgba(255, 138, 0, 0.14) !important;
+    border-color: rgba(255, 138, 0, 0.3) !important;
+}
+
+.prayer-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(255, 138, 0, 0.18) !important;
+    border-color: rgba(255, 138, 0, 0.35) !important;
+}
+
+.prayer-card.active-prayer {
+    background: linear-gradient(135deg, rgba(255, 138, 0, 0.25), rgba(230, 92, 0, 0.15)) !important;
+    border-color: rgba(255, 138, 0, 0.6) !important;
+    box-shadow: 0 0 30px rgba(255, 138, 0, 0.25) !important;
+}
+
+/* ============================================================
+   Modals & Offcanvas
+   ============================================================ */
+.modal-content {
+    background: var(--modal-bg) !important;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--modal-border) !important;
+    color: var(--text-body);
+}
+
+.modal-backdrop {
+    background: var(--modal-backdrop) !important;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.offcanvas {
+    background: var(--modal-bg) !important;
+    backdrop-filter: blur(30px);
+    border-left: 1px solid var(--modal-border) !important;
+    color: var(--text-body);
+}
+
+/* ============================================================
+   Tables & Accordions
+   ============================================================ */
+.table {
+    color: var(--text-body);
+}
+
+.table > :not(caption) > * > * {
+    background: transparent;
+    border-color: var(--glass-border);
+    color: var(--text-body);
+}
+
+.table-hover > tbody > tr:hover > * {
+    background: rgba(255, 138, 0, 0.08);
+    color: var(--text-heading);
+}
+
+.accordion-item {
+    background: var(--glass-bg) !important;
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--card-border) !important;
+    border-radius: var(--radius-card) !important;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.accordion-button {
+    background: transparent !important;
+    color: var(--text-heading) !important;
+    font-weight: 700;
+}
+
+.accordion-button:not(.collapsed) {
+    background: rgba(255, 138, 0, 0.10) !important;
+    color: var(--bs-primary) !important;
+    box-shadow: none !important;
+}
+
+[data-theme="dark"] .accordion-button::after {
+    filter: invert(1) brightness(2);
+}
+
+[data-theme="light"] .accordion-button::after {
+    filter: none;
+}
+
+.accordion-body {
+    background: transparent !important;
+    color: var(--text-secondary);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
 .footer {
-    background-color: var(--card-bg);
-    border-top: 1px solid var(--border-color);
+    background: var(--footer-bg) !important;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-top: 1px solid var(--footer-border) !important;
     padding: 4rem 0 2rem;
     margin-top: 4rem;
+    position: relative;
+    z-index: 1;
 }
 
-/* Phone layout: prevent the home hero from creating a horizontal viewport. */
+.footer a.text-muted:hover {
+    color: var(--bs-primary) !important;
+}
+
+/* ============================================================
+   Badges, Banners & Helpers
+   ============================================================ */
+.bg-light-primary {
+    background: rgba(255, 138, 0, 0.10) !important;
+}
+
+section.bg-light-primary {
+    background: linear-gradient(135deg, rgba(255, 138, 0, 0.10), rgba(255, 80, 30, 0.05)) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 138, 0, 0.12) !important;
+}
+
+.bg-light, .bg-white {
+    background: var(--glass-bg-light) !important;
+}
+
+.border-top {
+    border-color: var(--glass-border) !important;
+}
+
+.border-secondary {
+    border-color: var(--glass-border) !important;
+}
+
+.meccan-badge {
+    background: rgba(255, 138, 0, 0.15) !important;
+    color: #e67700 !important;
+    border: 1px solid rgba(255, 138, 0, 0.25) !important;
+}
+
+.medinan-badge {
+    background: rgba(34, 197, 94, 0.12) !important;
+    color: #16a34a !important;
+    border: 1px solid rgba(34, 197, 94, 0.25) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 138, 0, 0.4);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 138, 0, 0.7);
+}
+
+::selection {
+    background: rgba(255, 138, 0, 0.3);
+    color: var(--text-heading);
+}
+
+/* Mobile Responsive */
 @media (max-width: 575.98px) {
     .hero-section {
         padding: 4rem 0;
     }
 
     .hero-title {
-        font-size: clamp(2rem, 10vw, 2.6rem);
+        font-size: clamp(2rem, 9vw, 2.6rem);
         line-height: 1.35;
         overflow-wrap: anywhere;
     }
 
     .hero-subtitle {
         font-size: 1rem;
-        line-height: 1.9;
+        line-height: 1.8;
         margin-bottom: 1.5rem;
     }
 
@@ -318,8 +855,6 @@ a:hover {
 
     .hero-actions .btn {
         width: 100%;
-        padding-right: 1rem !important;
-        padding-left: 1rem !important;
     }
 
     .service-card {

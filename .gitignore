@@ -1,2 +1,20 @@
+# Local configuration overrides
 config/database.local.php
+
+# Local Cache files
+cache/*
+!cache/.gitkeep
+
+# System & OS Files
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
 *.zip
+*.tar.gz
+
+# IDE & Editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

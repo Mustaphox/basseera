@@ -29,7 +29,7 @@
             <!-- Playlist Sidebar -->
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm rounded-4 h-100 d-flex flex-column">
-                    <div class="card-header bg-white border-bottom p-4">
+                    <div class="card-header border-bottom p-4" style="background: rgba(255,255,255,0.05);">
                         <div class="d-flex justify-content-between align-items-center">
                             <h3 class="h5 fw-bold mb-0">الحلقات</h3>
                             <span class="badge bg-light-primary text-primary px-3 py-2 rounded-pill" id="playlistCount">0 / 0</span>
@@ -57,11 +57,12 @@
     align-items: center;
 }
 .playlist-item:hover {
-    background-color: rgba(255, 138, 0, 0.03);
+    background-color: rgba(255, 138, 0, 0.10);
 }
 .playlist-item.active {
-    background-color: rgba(255, 138, 0, 0.1);
+    background-color: rgba(255, 138, 0, 0.18);
     border-right: 4px solid var(--bs-primary);
+    box-shadow: inset 0 0 20px rgba(255,138,0,0.08);
 }
 .playlist-thumb {
     position: relative;

@@ -4,7 +4,7 @@
     <div class="hero-bg-pattern position-absolute w-100 h-100 top-0 start-0 opacity-25"></div>
     <div class="container text-center position-relative z-1">
         <h1 class="display-4 fw-bold text-primary mb-3">القرآن الكريم</h1>
-        <p class="lead text-muted mx-auto" style="max-width: 600px;">تلاوة، تفسير، واستماع لأشهر القراء من خلال بصيرة</p>
+        <p class="lead text-muted mx-auto" style="max-width: 600px;">تلاوة، تفسير، واستماع لكامل سور القرآن الكريم بأصوات نخبة القراء</p>
     </div>
 </section>
 
@@ -12,24 +12,34 @@
     <div class="container">
 
         <!-- Controls & Filters -->
-        <div class="card border-0 shadow-sm rounded-4 p-4 mb-5 bg-white">
+        <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
             <div class="row g-3 align-items-center">
-                <div class="col-lg-5">
+                <!-- Search input -->
+                <div class="col-lg-4 col-md-6">
                     <div class="position-relative">
                         <i data-lucide="search" class="position-absolute top-50 translate-middle-y text-muted" style="right: 16px; pointer-events:none;"></i>
                         <input type="text" id="surahSearch" class="form-control form-control-lg pe-5 bg-light border-0" placeholder="ابحث عن سورة (مثال: البقرة، الكهف)..." style="padding-right: 48px;">
                     </div>
                 </div>
-                <div class="col-lg-3">
+
+                <!-- Reciter selector -->
+                <div class="col-lg-3 col-md-6">
                     <select id="readerSelect" class="form-select form-select-lg bg-light border-0">
-                        <option value="ar.alafasy">مشاري العفاسي</option>
-                        <option value="ar.abdulbasitmurattal">عبد الباسط عبد الصمد</option>
+                        <option value="ar.alafasy">مشاري راشد العفاسي</option>
+                        <option value="ar.abdulbasitmurattal">عبد الباسط عبد الصمد (مرتل)</option>
                         <option value="ar.husary">محمود خليل الحصري</option>
-                        <option value="ar.minshawi">محمد صديق المنشاوي</option>
+                        <option value="ar.minshawi">محمد صديق المنشاوي (مرتل)</option>
                         <option value="ar.sudais">عبد الرحمن السديس</option>
+                        <option value="ar.maher">ماهر المعيقلي</option>
+                        <option value="ar.ghamdi">سعد الغامدي</option>
+                        <option value="ar.dosari">ياسر الدوسري</option>
+                        <option value="ar.shatri">أبو بكر الشاطري</option>
+                        <option value="ar.ajamy">أحمد بن علي العجمي</option>
                     </select>
                 </div>
-                <div class="col-lg-4">
+
+                <!-- Revelation Filter -->
+                <div class="col-lg-3 col-md-6">
                     <div class="btn-group w-100" role="group">
                         <input type="radio" class="btn-check" name="revelationFilter" id="filterAll" value="all" checked>
                         <label class="btn btn-outline-primary rounded-start-pill" for="filterAll">الكل</label>
@@ -39,24 +49,31 @@
                         <label class="btn btn-outline-primary rounded-end-pill" for="filterMedinan">مدنية</label>
                     </div>
                 </div>
+
+                <!-- Jump to Surah -->
+                <div class="col-lg-2 col-md-6">
+                    <select id="quickJumpSelect" class="form-select form-select-lg bg-light border-0" onchange="if(this.value) window.location.href='<?= BASE_URL ?>quran/surah?id='+this.value">
+                        <option value="">انتقال لسورة...</option>
+                    </select>
+                </div>
             </div>
         </div>
 
         <!-- Skeleton Loader -->
         <div class="row g-4" id="skeletonLoader">
-            <?php for($i=0; $i<12; $i++): ?>
+            <?php for($i=0; $i<9; $i++): ?>
             <div class="col-lg-4 col-md-6">
-                <div class="card p-4 border-0 shadow-sm rounded-4 placeholder-glow" style="min-height: 150px;">
+                <div class="card p-4 border-0 shadow-sm rounded-4 placeholder-glow" style="min-height: 140px;">
                     <div class="d-flex align-items-center gap-3 mb-4">
-                        <span class="placeholder rounded-circle bg-secondary" style="width:50px; height:50px; flex-shrink:0;"></span>
+                        <span class="placeholder rounded-circle bg-secondary" style="width:48px; height:48px; flex-shrink:0;"></span>
                         <div class="flex-grow-1">
                             <span class="placeholder col-7 mb-2 d-block rounded" style="height:18px;"></span>
                             <span class="placeholder col-4 d-block rounded" style="height:14px;"></span>
                         </div>
                     </div>
                     <div class="d-flex gap-2">
-                        <span class="placeholder col-6 rounded-pill" style="height:40px;"></span>
-                        <span class="placeholder col-6 rounded-pill" style="height:40px;"></span>
+                        <span class="placeholder col-6 rounded-pill" style="height:38px;"></span>
+                        <span class="placeholder col-6 rounded-pill" style="height:38px;"></span>
                     </div>
                 </div>
             </div>
@@ -74,12 +91,23 @@
         </div>
 
         <!-- Surahs Grid -->
-        <div class="row g-4" id="surahsGrid" style="display:none;"></div>
+        <div class="row g-3 g-md-4" id="surahsGrid" style="display:none;"></div>
+
+        <!-- Pagination Controls -->
+        <div class="d-flex justify-content-center align-items-center gap-3 mt-5" id="surahsPagination" style="display:none;">
+            <button class="btn btn-outline-primary rounded-pill px-4" id="prevSurahBtn" onclick="changeSurahPage(-1)">
+                <i data-lucide="chevron-right" class="me-1"></i> السابق
+            </button>
+            <span class="text-muted fw-bold" id="surahPageIndicator">صفحة 1 من 6</span>
+            <button class="btn btn-outline-primary rounded-pill px-4" id="nextSurahBtn" onclick="changeSurahPage(1)">
+                التالي <i data-lucide="chevron-left" class="ms-1"></i>
+            </button>
+        </div>
 
         <!-- No Results -->
         <div id="noResults" class="d-none text-center py-5">
             <div class="mb-4" style="font-size: 4rem;">🔍</div>
-            <h4 class="text-muted">لا توجد نتائج مطابقة</h4>
+            <h4 class="text-muted fw-bold">لا توجد نتائج مطابقة</h4>
         </div>
 
     </div>
@@ -88,37 +116,39 @@
 <style>
 .surah-card {
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    border: 1.5px solid #f2f2f2;
-    cursor: default;
 }
 .surah-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 32px rgba(255,138,0,0.14) !important;
-    border-color: #FF8A00;
+    transform: translateY(-5px);
+    box-shadow: 0 16px 35px rgba(255,138,0,0.2) !important;
+    border-color: rgba(255,138,0,0.45) !important;
+    background: linear-gradient(135deg, rgba(255,138,0,0.12), rgba(255,80,30,0.06)) !important;
 }
 .surah-num-badge {
-    width: 50px; height: 50px; flex-shrink: 0;
-    background: linear-gradient(135deg, #fff5e6, #ffe0b0);
+    width: 46px; height: 46px; flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(255,138,0,0.25), rgba(255,80,30,0.15));
+    border: 1px solid rgba(255,138,0,0.35);
     color: #FF8A00;
-    font-size: 1.1rem; font-weight: 700;
+    font-size: 1.05rem; font-weight: 700;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
 }
 .revelation-badge {
     font-size: 0.75rem; font-weight: 600;
-    padding: 4px 12px; border-radius: 20px;
+    padding: 3px 10px; border-radius: 20px;
 }
-.meccan-badge { background: #fff3e0; color: #e65100; }
-.medinan-badge { background: #e8f5e9; color: #2e7d32; }
 </style>
 
 <script>
 var allSurahs = [];
+var filteredSurahs = [];
+var currentSurahPage = 1;
+var surahPageSize = 21;
 
 function loadSurahs() {
     document.getElementById('skeletonLoader').style.display = '';
     document.getElementById('errorState').classList.add('d-none');
     document.getElementById('surahsGrid').style.display = 'none';
+    document.getElementById('surahsPagination').style.display = 'none';
 
     fetch('https://api.alquran.cloud/v1/surah')
         .then(function(res) { return res.json(); })
@@ -127,6 +157,16 @@ function loadSurahs() {
             allSurahs = json.data;
             document.getElementById('skeletonLoader').style.display = 'none';
             document.getElementById('surahsGrid').style.display = '';
+            
+            // Populate quick jump dropdown
+            var jumpSelect = document.getElementById('quickJumpSelect');
+            allSurahs.forEach(function(s) {
+                var opt = document.createElement('option');
+                opt.value = s.number;
+                opt.textContent = s.number + '. ' + s.name;
+                jumpSelect.appendChild(opt);
+            });
+
             applyFilters();
         })
         .catch(function() {
@@ -139,7 +179,7 @@ function applyFilters() {
     var query = document.getElementById('surahSearch').value.trim().toLowerCase();
     var typeFilter = document.querySelector('input[name="revelationFilter"]:checked').value;
 
-    var filtered = allSurahs.filter(function(s) {
+    filteredSurahs = allSurahs.filter(function(s) {
         var matchSearch = s.name.includes(query) ||
                           s.englishName.toLowerCase().includes(query) ||
                           s.englishNameTranslation.toLowerCase().includes(query) ||
@@ -148,32 +188,40 @@ function applyFilters() {
         return matchSearch && matchType;
     });
 
-    renderSurahs(filtered);
+    currentSurahPage = 1;
+    renderSurahs();
 }
 
-function renderSurahs(surahs) {
+function renderSurahs() {
     var grid = document.getElementById('surahsGrid');
     var noRes = document.getElementById('noResults');
+    var pag = document.getElementById('surahsPagination');
 
-    if (surahs.length === 0) {
+    if (filteredSurahs.length === 0) {
         grid.innerHTML = '';
         noRes.classList.remove('d-none');
+        pag.style.display = 'none';
         return;
     }
     noRes.classList.add('d-none');
 
+    var totalPages = Math.ceil(filteredSurahs.length / surahPageSize);
+    var start = (currentSurahPage - 1) * surahPageSize;
+    var end = Math.min(start + surahPageSize, filteredSurahs.length);
+    var pageItems = filteredSurahs.slice(start, end);
+
     var html = '';
-    surahs.forEach(function(surah, i) {
+    pageItems.forEach(function(surah) {
         var typeAr = surah.revelationType === 'Meccan' ? 'مكية' : 'مدنية';
         var badgeClass = surah.revelationType === 'Meccan' ? 'meccan-badge' : 'medinan-badge';
 
         html += '<div class="col-xl-4 col-md-6">' +
             '<div class="card h-100 p-4 border-0 shadow-sm rounded-4 surah-card">' +
-                '<div class="d-flex justify-content-between align-items-center mb-4">' +
+                '<div class="d-flex justify-content-between align-items-center mb-3">' +
                     '<div class="d-flex align-items-center gap-3">' +
                         '<div class="surah-num-badge">' + surah.number + '</div>' +
                         '<div>' +
-                            '<h3 class="h5 mb-1 fw-bold text-dark" style="font-family: \'Amiri\', \'Cairo\', serif;">' + surah.name + '</h3>' +
+                            '<h3 class="h5 mb-1 fw-bold" style="font-family: \'Amiri\', serif;">' + surah.name + '</h3>' +
                             '<small class="text-muted d-block">' + surah.englishName + '</small>' +
                         '</div>' +
                     '</div>' +
@@ -182,12 +230,12 @@ function renderSurahs(surahs) {
                         '<small class="text-muted">' + surah.numberOfAyahs + ' آية</small>' +
                     '</div>' +
                 '</div>' +
-                '<div class="d-flex gap-2">' +
+                '<div class="d-flex gap-2 mt-auto pt-2">' +
                     '<a href="<?= BASE_URL ?>quran/surah?id=' + surah.number + '" class="btn btn-primary flex-grow-1 rounded-pill fw-bold">' +
-                        '<i data-lucide="book-open" style="width:16px;height:16px;" class="me-1"></i> اقرأ' +
+                        '<i data-lucide="book-open" style="width:15px;height:15px;" class="me-1"></i> اقرأ' +
                     '</a>' +
                     '<button onclick="playSurah(' + surah.number + ')" class="btn btn-outline-primary flex-grow-1 rounded-pill fw-bold">' +
-                        '<i data-lucide="headphones" style="width:16px;height:16px;" class="me-1"></i> استمع' +
+                        '<i data-lucide="headphones" style="width:15px;height:15px;" class="me-1"></i> استمع' +
                     '</button>' +
                 '</div>' +
             '</div>' +
@@ -195,20 +243,34 @@ function renderSurahs(surahs) {
     });
 
     grid.innerHTML = html;
+
+    if (totalPages > 1) {
+        pag.style.display = 'flex';
+        document.getElementById('surahPageIndicator').textContent = 'صفحة ' + currentSurahPage + ' من ' + totalPages;
+        document.getElementById('prevSurahBtn').disabled = currentSurahPage <= 1;
+        document.getElementById('nextSurahBtn').disabled = currentSurahPage >= totalPages;
+    } else {
+        pag.style.display = 'none';
+    }
+
     if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function changeSurahPage(delta) {
+    currentSurahPage += delta;
+    renderSurahs();
+    window.scrollTo({ top: 350, behavior: 'smooth' });
 }
 
 function playSurah(id) {
     var reader = document.getElementById('readerSelect').value;
-    window.location.href = '<?= BASE_URL ?>quran/surah?id=' + id + '&listen=true&reader=' + reader;
+    window.location.href = '<?= BASE_URL ?>quran/surah?id=' + id + '&listen=true&reader=' + encodeURIComponent(reader) + '&mode=full';
 }
 
-// Event Listeners
 document.getElementById('surahSearch').addEventListener('input', applyFilters);
 document.querySelectorAll('input[name="revelationFilter"]').forEach(function(r) {
     r.addEventListener('change', applyFilters);
 });
 
-// Boot
 loadSurahs();
 </script>

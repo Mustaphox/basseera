@@ -4,21 +4,21 @@
         <div class="row gy-4">
             <div class="col-lg-4 col-md-6" data-aos="fade-up">
                 <a class="navbar-brand mb-3 d-flex align-items-center gap-2 text-primary fs-3 fw-bold" href="<?= BASE_URL ?>">
-                    <img src="<?= BASE_URL ?>logo.png" alt="بصيرة" style="height: 50px; width: auto;"> بصيرة
+                    <img src="<?= BASE_URL ?>logo.png" alt="بصيرة" style="height: 46px; width: auto;"> بصيرة
                 </a>
-                <p class="text-muted pe-lg-4">
+                <p class="text-muted pe-lg-4 lh-lg">
                     <?= e(get_setting($pdo, 'site_description', 'منصة إسلامية متكاملة تضم القرآن الكريم، الأحاديث، السيرة النبوية، الأذكار، الأدعية، ومحتوى إسلاميًا موثوقًا.')) ?>
                 </p>
                 <div class="d-flex gap-3 mt-4">
-                    <a href="<?= e(get_setting($pdo, 'facebook_url', '#')) ?>" class="icon-btn bg-light-primary"><i data-lucide="facebook"></i></a>
-                    <a href="<?= e(get_setting($pdo, 'twitter_url', '#')) ?>" class="icon-btn bg-light-primary"><i data-lucide="twitter"></i></a>
-                    <a href="<?= e(get_setting($pdo, 'instagram_url', '#')) ?>" class="icon-btn bg-light-primary"><i data-lucide="instagram"></i></a>
-                    <a href="<?= e(get_setting($pdo, 'youtube_url', '#')) ?>" class="icon-btn bg-light-primary"><i data-lucide="youtube"></i></a>
+                    <a href="<?= e(get_setting($pdo, 'facebook_url', '#')) ?>" class="icon-btn" title="Facebook" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                    <a href="<?= e(get_setting($pdo, 'twitter_url', '#')) ?>" class="icon-btn" title="Twitter" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                    <a href="<?= e(get_setting($pdo, 'instagram_url', '#')) ?>" class="icon-btn" title="Instagram" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                    <a href="<?= e(get_setting($pdo, 'youtube_url', '#')) ?>" class="icon-btn" title="YouTube" aria-label="YouTube"><i data-lucide="youtube"></i></a>
                 </div>
             </div>
             
             <div class="col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <h5 class="mb-4">روابط سريعة</h5>
+                <h5 class="mb-4 fw-bold">روابط سريعة</h5>
                 <ul class="list-unstyled d-flex flex-column gap-2">
                     <li><a href="<?= BASE_URL ?>quran" class="text-muted text-decoration-none">القرآن الكريم</a></li>
                     <li><a href="<?= BASE_URL ?>hadith" class="text-muted text-decoration-none">الأحاديث النبوية</a></li>
@@ -28,7 +28,7 @@
             </div>
             
             <div class="col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <h5 class="mb-4">خدمات إسلامية</h5>
+                <h5 class="mb-4 fw-bold">خدمات إسلامية</h5>
                 <ul class="list-unstyled d-flex flex-column gap-2">
                     <li><a href="<?= BASE_URL ?>prayer-times" class="text-muted text-decoration-none">مواقيت الصلاة</a></li>
                     <li><a href="<?= BASE_URL ?>qibla" class="text-muted text-decoration-none">اتجاه القبلة</a></li>
@@ -38,11 +38,11 @@
             </div>
             
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                <h5 class="mb-4">النشرة البريدية</h5>
-                <p class="text-muted">اشترك للحصول على رسائل يومية بآيات وأحاديث وأدعية.</p>
-                <form class="d-flex gap-2" onsubmit="event.preventDefault();">
+                <h5 class="mb-4 fw-bold">النشرة البريدية</h5>
+                <p class="text-muted">اشترك للحصول على رسائل يومية بآيات وأحاديث وأدعية مأثورة.</p>
+                <form class="d-flex gap-2" onsubmit="event.preventDefault(); alert('شكراً لاشتراكك في نشرة بصيرة البريدية');">
                     <input type="email" class="form-control" placeholder="البريد الإلكتروني" required>
-                    <button type="submit" class="btn btn-primary px-4">اشتراك</button>
+                    <button type="submit" class="btn btn-primary px-4 fw-bold">اشتراك</button>
                 </form>
             </div>
         </div>
@@ -66,11 +66,11 @@
     </div>
 </footer>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="<?= BASE_URL ?>assets/js/main.js"></script>
+<!-- Optimized Scripts Loading -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+<script src="https://unpkg.com/lucide@latest" defer></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+<script src="<?= BASE_URL ?>assets/js/main.js" defer></script>
 
 </body>
 </html>
